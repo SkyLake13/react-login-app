@@ -1,0 +1,28 @@
+.app {
+    
+}
+
+.nav {
+    min-width: max-content;
+}
+
+.nav-item {
+    padding: 10px 0px 10px 0px;
+    background-color: bisque;
+    border: solid;
+    cursor: pointer;
+}
+
+.content-area {
+    display: flex;
+    border: solid;
+}
+
+.content-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.content-item {
+    
+}
