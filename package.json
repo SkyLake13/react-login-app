@@ -1,0 +1,53 @@
+{
+  "name": "react-boilerplate-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:style": "tailwind build src/index.css -o src/tailwind.css",
+    "build": "npm run build:style && npx webpack --config webpack.prod.js",
+    "start": "npm run build:style && npx webpack-dev-server --config webpack.dev.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SkyLake13/react-boilerplate-ts.git"
+  },
+  "author": "Skylake",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SkyLake13/react-boilerplate-ts/issues"
+  },
+  "homepage": "https://github.com/SkyLake13/react-boilerplate-ts#readme",
+  "devDependencies": {
+    "@testing-library/react": "^11.2.5",
+    "@types/jest": "^26.0.20",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
+    "autoprefixer": "^10.2.5",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.6.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.5.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.6.3",
+    "postcss": "^8.2.8",
+    "postcss-cli": "^8.3.1",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
+    "style-loader": "^1.2.1",
+    "tailwindcss": "^2.0.4",
+    "ts-jest": "^26.5.3",
+    "ts-loader": "^7.0.5",
+    "typescript": "^4.2.3",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
