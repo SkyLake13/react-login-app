@@ -1,20 +1,28 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import ForgotPassword from './ForgotPassword';
-import Login from './Login';
-import Signup from './Signup';
+
+const Signup = lazy(() => import('./Signup'));
+const Login = lazy(() => import('./Login'));
+const ForgotPassword = lazy(() => import('./ForgotPassword'));
 
 export default function App(): JSX.Element {
     return (
         <Router>
             <Switch>
                 <Route exact path="/">
-                    <Login />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Login />
+                    </Suspense>
                 </Route>
                 <Route path="/signup">
-                    <Signup />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Signup />
+                    </Suspense>
                 </Route>
                 <Route path="/forgot-password">
-                    <ForgotPassword />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <ForgotPassword />
+                    </Suspense>
                 </Route>
             </Switch>
         </Router>
