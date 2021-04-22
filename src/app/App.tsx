@@ -10,21 +10,25 @@ export default function App(): JSX.Element {
         <Router>
             <Switch>
                 <Route exact path="/">
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Loading />}>
                         <Login />
                     </Suspense>
                 </Route>
                 <Route path="/signup">
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Loading />}>
                         <Signup />
                     </Suspense>
                 </Route>
                 <Route path="/forgot-password">
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Loading />}>
                         <ForgotPassword />
                     </Suspense>
                 </Route>
             </Switch>
         </Router>
     );
+}
+
+function Loading(): JSX.Element {
+    return (<div>Loading...</div>);
 }
