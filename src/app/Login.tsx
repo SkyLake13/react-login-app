@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import './App.scss';
 import image from "../assets/react.png";
+import useHttp from './useHttp';
 
 interface FormData {
     username: string;
@@ -23,12 +24,21 @@ function useQuery(): URLSearchParams {
 
 export default function Login(): JSX.Element {
     const queryParams = useQuery();
+    let returnUrl = queryParams.get('return_url');
+
+    const { post } = useHttp('/login');
 
     const { register, handleSubmit, errors } = useForm<FormData>();
 
-    const onSubmit = (dta: FormData) => {
+    const onSubmit = async (dta: FormData) => {
         console.log(dta);
-        window.location.href = queryParams.get('return_url') ?? window.location.href;
+
+        const response = await post<{ token: string }>({ userName: dta.username, password: dta.password });
+
+        returnUrl = returnUrl ?? window.location.href;
+        returnUrl = `${returnUrl}?token=${response.data.token}`;
+
+        window.location.replace(returnUrl);
     };
 
     return (

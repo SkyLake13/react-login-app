@@ -1,16 +1,18 @@
 import { TextField, Container, Button, Typography, Paper } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { CSSProperties } from 'react';
 
 import image from "../assets/react.png";
+import useHttp from './useHttp';
 
-interface FormData {
-    username: string;
+interface ISignup {
+    userName: string;
     password: string;
     confirmPassword: string;
     name: string;
     email: string;
+    phone: string;
 }
 
 const form: CSSProperties = {
@@ -20,10 +22,18 @@ const form: CSSProperties = {
 }
 
 export default function Signup(): JSX.Element {
-    const { register, handleSubmit, errors } = useForm<FormData>();
+    const history = useHistory();
 
-    const onSubmit = (dta: FormData) => {
-        console.log(dta);
+    const { register, handleSubmit, errors } = useForm<ISignup>();
+
+    const { post } = useHttp('/signup');
+
+    const onSubmit = ({ userName, password, name, email, phone }: ISignup) => {
+        const data = { userName, password, name, email, phone };
+
+        post<void>(data).then((_) => {
+            history.push('/signup-done');
+        });
     };
 
     return (
@@ -35,8 +45,10 @@ export default function Signup(): JSX.Element {
                         name="name" {...(errors.name && { error: true })} inputRef={register({ required: true })} />
                     <TextField type="email" label="Email" variant="outlined" style={{ margin: '10px' }}
                         name="email" {...(errors.email && { error: true })} inputRef={register({ required: true })} />
+                    <TextField type="phone" label="Phone" variant="outlined" style={{ margin: '10px' }}
+                        name="phone" {...(errors.phone && { error: true })} inputRef={register({ required: true })} />
                     <TextField label="Username" variant="outlined" style={{ margin: '10px' }}
-                        name="username" {...(errors.username && { error: true })} inputRef={register({ required: true })} />
+                        name="userName" {...(errors.userName && { error: true })} inputRef={register({ required: true })} />
                     <TextField type="password" label="Password" variant="outlined" style={{ margin: '10px' }}
                         name="password" {...(errors.password && { error: true })} inputRef={register({ required: true })} />
                     <TextField type="password" label="Confirm Password" variant="outlined" style={{ margin: '10px' }}
